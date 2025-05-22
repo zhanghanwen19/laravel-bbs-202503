@@ -12,7 +12,7 @@
     <title>@yield('title', 'LaraBBS') - Laravel 进阶教程</title>
 
     <!-- Use vite include styles and scripts. -->
-    @vite(['resources/css/app.css'])
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
 </head>
 
@@ -30,7 +30,6 @@
     </div>
 
     @include('layouts._footer')
-    @vite(['resources/js/app.js'])
 </div>
 </body>
 </html>
