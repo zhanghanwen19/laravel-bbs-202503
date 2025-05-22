@@ -1,6 +1,10 @@
 // resources/sass/app.scss
 
 @use 'variables' as *;
+
+// Fontawesome
+@use '@fortawesome/fontawesome-free/scss/fontawesome';
+
 @import url('https://fonts.bunny.net/css?family=Nunito');
 
 body {

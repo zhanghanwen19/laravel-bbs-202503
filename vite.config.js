@@ -11,4 +11,11 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    css: {
+        preprocessorOptions: {
+            scss: {
+                quietDeps: true // 隐藏依赖项的警告
+            }
+        }
+    }
 });
