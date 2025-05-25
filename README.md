@@ -107,7 +107,7 @@
     git commit -m "修改本地化支持日语"
     ```
 
-- Laravel 清楚所有缓存
+- Laravel 清除所有缓存
     ```bash
     php artisan optimize:clear
     ```
@@ -143,4 +143,64 @@
     git add .
     git commit -m "安装验证码"
     ```
-  
+
+### 📅 2025/05/23
+
+- 你现在可以通过以下的方法来判断用户是否已经验证了邮箱地址:
+    ```php
+    auth()->user()->hasVerifiedEmail();
+    ```
+
+- 创建邮箱验证成功后的事件
+    ```bash
+    php artisan make:listener EmailVerified
+    ```
+
+- 可以使用以下命令来查看所有的事件
+    ```bash
+    php artisan event:list
+    ```
+
+- 创建完成之后在 [app/Listeners/EmailVerified.php](app/Listeners/EmailVerified.php) 中去做你想要的事情
+    ```php
+    public function handle(Verified $event)
+    {
+        session()->flash('success', 'Your email address has been verified.');
+    }
+    ```
+
+- 最后要在 [AppServiceProvider.php](app/Providers/AppServiceProvider.php) 中注册事件监听
+    ```php
+    public function boot(): void
+    {
+        // 注册事件监听
+        // https://laravel.com/docs/12.x/events
+        Event::listen(
+          EmailVerified::class, // 事件类, 在用户完成邮箱验证后触发
+        );
+    }
+    ```
+
+- 创建 users 控制器
+    ```bash
+    php artisan make:controller UsersController
+    ```
+
+- 创建一个数据迁移文件给 users 表添加 avatar 和 introduction
+    ```bash
+    php artisan make:migration add_avatar_and_introduction_to_users_table --table=users
+    php artisan migrate
+    ```
+
+- 创建 UserRequest
+    ```bash
+    php artisan make:request UserRequest
+    ```
+
+- 在创建完 UserRequest 之后需要去修改一下默认的授权策略
+    ```php
+    public function authorize()
+    {
+        return true;
+    }
+    ```
