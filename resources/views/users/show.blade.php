@@ -16,7 +16,7 @@
                     <p>{{ $user->introduction }}</p>
                     <hr>
                     <h5><strong>{{ __('Joined on') }}</strong></h5>
-                    <p>January 01 1901</p>
+                    <p>{{ $user->created_at->diffForHumans() }}</p>
                 </div>
             </div>
         </div>
