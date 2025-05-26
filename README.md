@@ -204,3 +204,10 @@
         return true;
     }
     ```
+
+### 📅 2025/05/26
+
+- 安装 intervention/image
+    ```bash
+    composer require intervention/image
+    ```
