@@ -26,7 +26,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
-                            <img src="{{ asset('images/avatar.png') }}"
+                            <img src="{{ auth()->user()->avatar }}"
                                  class="img-responsive img-circle" width="30px" height="30px" alt="">
                             {{ auth()->user()->name }}
                         </a>

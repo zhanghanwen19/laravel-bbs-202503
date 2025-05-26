@@ -38,6 +38,10 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|User wherePassword($value)
  * @method static Builder<static>|User whereRememberToken($value)
  * @method static Builder<static>|User whereUpdatedAt($value)
+ * @property string|null $avatar 头像
+ * @property string|null $introduction 个人简介
+ * @method static Builder<static>|User whereAvatar($value)
+ * @method static Builder<static>|User whereIntroduction($value)
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements MustVerifyEmail
@@ -54,6 +58,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'avatar',
+        'introduction',
     ];
 
     /**
