@@ -228,3 +228,20 @@
     - 本地化: 应用程序中支持多种语言, 并在应用程序中进行语言切换.
     - Eloquent ORM : 应用程序中对数据库进行操作, 例如查询数据, 插入数据, 更新数据等.
     - 数据生成和数据填充: 应用程序中生成测试数据, 例如用户数据, 文章数据等.
+
+- 生成 category 模型
+    ```bash
+    php artisan make:model Category -mcr
+    ```
+    - -m 表示生成数据迁移文件, -c 表示生成控制器, -r 表示生成资源控制器.
+
+- 生成 category 表的初始化数据 migration
+    ```bash
+    php artisan make:migration seed_categories_data
+    ```
+    - 因为帖子分类应该是项目初始化的时候就要准备好的数据, 是我们项目的一部分, 所以我们没有像之前那样使用 seeder 来生成数据, 而是直接在 migration 中生成数据. seeder 是用来生成测试数据的, 而 migration 是用来生成项目的一部分数据的.
+
+- 运行数据迁移
+    ```bash
+    php artisan migrate
+    ```
