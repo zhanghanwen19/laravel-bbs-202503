@@ -239,9 +239,30 @@
     ```bash
     php artisan make:migration seed_categories_data
     ```
-    - 因为帖子分类应该是项目初始化的时候就要准备好的数据, 是我们项目的一部分, 所以我们没有像之前那样使用 seeder 来生成数据, 而是直接在 migration 中生成数据. seeder 是用来生成测试数据的, 而 migration 是用来生成项目的一部分数据的.
+    - 因为帖子分类应该是项目初始化的时候就要准备好的数据, 是我们项目的一部分, 所以我们没有像之前那样使用 seeder 来生成数据,
+      而是直接在 migration 中生成数据. seeder 是用来生成测试数据的, 而 migration 是用来生成项目的一部分数据的.
 
 - 运行数据迁移
     ```bash
     php artisan migrate
     ```
+
+- 我们使用 Laravel 自带的命令来生成 Topic 的「话题骨架」
+    ```bash
+    php artisan make:model Topic -a -s -p
+    ```
+    - 参数含义
+        - -a All：等同于 -mfcr（见下）
+        - -m 创建数据库迁移文件 create_topics_table
+        - -f 创建对应的 factory 工厂类
+        - -c 创建控制器类（普通控制器）
+        - -r 创建 resource 控制器（带 REST 方法）
+        - -s 创建 Seeder（数据填充器）
+        - -p 创建 Policy（策略类）
+
+- 执行数据迁移
+    ```bash
+    php artisan migrate
+    ```
+
+     
