@@ -287,4 +287,12 @@
 
 - 在 [app.scss](resources/sass/app.scss) 中引入 fontawesome
 
+- 安装 barryvdh/laravel-debugbar
+    ```bash
+    composer require barryvdh/laravel-debugbar --dev
+    ```
+    ```bash
+    php artisan vendor:publish --provider="Barryvdh\Debugbar\ServiceProvider"
+    ```
+
      
