@@ -1,42 +1,34 @@
 @extends('layouts.app')
 
-@section('title', __('Topics index'))
+@section('title', __('Topics'))
 
 @section('content')
-    <div class="card mb-3">
-        <div class="card-header">
-            <h5 class="card-title">{{ __('Topics') }}</h5>
+
+    <div class="row mb-5">
+        <div class="col-lg-9 col-md-9 topic-list">
+            <div class="card ">
+
+                <div class="card-header bg-transparent">
+                    <ul class="nav nav-pills">
+                        <li class="nav-item"><a class="nav-link active" href="#">最后回复</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">最新发布</a></li>
+                    </ul>
+                </div>
+
+                <div class="card-body">
+                    {{-- 话题列表 --}}
+                    @include('topics._topic_list', ['topics' => $topics])
+                    {{-- 分页 --}}
+                    <div class="mt-5">
+                        {!! $topics->appends(\Illuminate\Support\Facades\Request::except('page'))->render() !!}
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-            @if ($topics->isEmpty())
-                <p class="text-muted">{{ __('No topics found.') }}</p>
-            @else
-                <ul class="list-group">
-                    @foreach ($topics as $topic)
-                        <li class="list-group-item">
-                            <a href="{{ route('topics.show', $topic->id) }}" class="text-decoration-none">
-                                <h5 class="mb-1">{{ $topic->title }}</h5>
-                            </a>
-                            <p class="mb-1">{{ \Illuminate\Support\Str::limit($topic->content, 100) }}</p>
-                            <small class="text-muted">{{ __('Created at') }}
-                                : {{ $topic->created_at->diffForHumans() }}</small>
-                            <div class="mt-2">
-                                <a href="{{ route('topics.show', $topic->id) }}" class="btn btn-primary btn-sm">
-                                    {{ __('View') }}
-                                </a>
-                            </div>
-                        </li>
-                    @endforeach
-                </ul>
-            @endif
+
+        <div class="col-lg-3 col-md-3 sidebar">
+            @include('topics._sidebar')
         </div>
     </div>
-    <div class="d-flex justify-content-center">
-        {{ $topics->links() }}
-    </div>
-    <div class="mt-3">
-        <a href="{{ route('topics.create') }}" class="btn btn-success">
-            {{ __('Create New Topic') }}
-        </a>
-    </div>
+
 @endsection

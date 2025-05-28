@@ -280,4 +280,11 @@
 - ⚠️ 我们现在的话题表叫做 topic, 你们要去修改数据迁移文件的名称以及内容
 - ⚠️ 还有就是 topic 相关的文件名称都要去重新确认一下, 我们按照 Laravel 生成的来做
 
+- 使用 yarn 安装 fontawesome
+    ```bash
+    yarn add @fortawesome/fontawesome-free
+    ```
+
+- 在 [app.scss](resources/sass/app.scss) 中引入 fontawesome
+
      
