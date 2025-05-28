@@ -5,15 +5,20 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTopicRequest;
 use App\Http\Requests\UpdateTopicRequest;
 use App\Models\Topic;
+use Illuminate\Contracts\View\View;
 
 class TopicsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
-        //
+        $topics = Topic::with(['user', 'category'])
+            ->orderBy('created_at', 'desc')
+            ->paginate($this->perPage);
+
+        return view('topics.index', compact('topics'));
     }
 
     /**
@@ -35,9 +40,9 @@ class TopicsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Topic $topic)
+    public function show(Topic $topic): View
     {
-        //
+        return view('topics.show', compact('topic'));
     }
 
     /**
