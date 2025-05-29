@@ -1,7 +1,6 @@
 @php
     use Illuminate\Support\Facades\Request;
 
-    $routeIsTopicsIndex = Request::routeIs('topics.index');
     $routeHasQueryOrder = Request::has('order');
     $currentOrder = Request::get('order', 'default'); // 默认值为 'default'
 
