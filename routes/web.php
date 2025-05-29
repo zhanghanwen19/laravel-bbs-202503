@@ -46,3 +46,6 @@ Route::resource('users', UserController::class)->only(['show', 'update', 'edit']
 
 // topic 资源路由
 Route::resource('topics', TopicController::class);
+
+// 按照分类显示话题
+Route::resource('categories', CategoryController::class)->only(['show']);
