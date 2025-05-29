@@ -2,9 +2,26 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ *
+ *
+ * @property int $id
+ * @property string $name 名称
+ * @property string|null $description 描述
+ * @property int $post_count 帖子数量
+ * @method static Builder<static>|Category newModelQuery()
+ * @method static Builder<static>|Category newQuery()
+ * @method static Builder<static>|Category query()
+ * @method static Builder<static>|Category whereDescription($value)
+ * @method static Builder<static>|Category whereId($value)
+ * @method static Builder<static>|Category whereName($value)
+ * @method static Builder<static>|Category wherePostCount($value)
+ * @mixin \Eloquent
+ */
 class Category extends Model
 {
     use HasFactory;

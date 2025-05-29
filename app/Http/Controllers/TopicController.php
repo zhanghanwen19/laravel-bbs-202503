@@ -7,7 +7,7 @@ use App\Http\Requests\UpdateTopicRequest;
 use App\Models\Topic;
 use Illuminate\Contracts\View\View;
 
-class TopicsController extends Controller
+class TopicController extends Controller
 {
     /**
      * Display a listing of the resource.

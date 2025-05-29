@@ -9,7 +9,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
-class UsersController extends Controller
+class UserController extends Controller
 {
     /**
      * Except for the 'show' method, all other methods in this controller require authentication.

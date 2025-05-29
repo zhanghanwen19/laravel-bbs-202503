@@ -6,9 +6,10 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PagesController;
-use App\Http\Controllers\TopicsController;
-use App\Http\Controllers\UsersController;
+use App\Http\Controllers\TopicController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PagesController::class, 'root'])->name('root');
@@ -38,10 +39,10 @@ Route::get('email/verify/{id}/{hash}', [VerificationController::class, 'verify']
 Route::post('email/resend', [VerificationController::class, 'resend'])->name('verification.resend');
 
 // 用户资源路由
-Route::resource('users', UsersController::class)->only(['show', 'update', 'edit']);
-// GET|HEAD        users/{user} .......... users.show › UsersController@show
-// PUT|PATCH       users/{user} ...... users.update › UsersController@update
-// GET|HEAD        users/{user}/edit ..... users.edit › UsersController@edit
+Route::resource('users', UserController::class)->only(['show', 'update', 'edit']);
+// GET|HEAD        users/{user} .......... users.show › UserController@show
+// PUT|PATCH       users/{user} ...... users.update › UserController@update
+// GET|HEAD        users/{user}/edit ..... users.edit › UserController@edit
 
 // topic 资源路由
-Route::resource('topics', TopicsController::class);
+Route::resource('topics', TopicController::class);
