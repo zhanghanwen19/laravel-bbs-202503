@@ -6,16 +6,17 @@ use App\Http\Requests\StoreTopicRequest;
 use App\Http\Requests\UpdateTopicRequest;
 use App\Models\Topic;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 
 class TopicController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Request $request, Topic $topic): View
     {
-        $topics = Topic::with(['user', 'category'])
-            ->orderBy('created_at', 'desc')
+        $topics = $topic->withOrder($request->order)
+            ->with(['user', 'category'])
             ->paginate($this->perPage);
 
         return view('topics.index', compact('topics'));

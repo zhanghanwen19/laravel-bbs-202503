@@ -44,6 +44,9 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|Topic whereUpdatedAt($value)
  * @method static Builder<static>|Topic whereUserId($value)
  * @method static Builder<static>|Topic whereViewCount($value)
+ * @method static Builder<static>|Topic recent()
+ * @method static Builder<static>|Topic recentReplied()
+ * @method static Builder<static>|Topic withOrder(string $order)
  * @mixin \Eloquent
  */
 class Topic extends Model
@@ -70,5 +73,48 @@ class Topic extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    /**
+     * Scope a query to order topics based on the specified order.
+     *
+     * @param $query
+     * @param string|null $order
+     * @return void
+     */
+    public function scopeWithOrder($query, ?string $order): void
+    {
+        switch ($order) {
+            case 'recent':
+                $query->recent($query);
+                break;
+            default:
+                $query->recentReplied($query);
+                break;
+        }
+    }
+
+    /**
+     * Scope a query to order topics by creation date.
+     *
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeRecent(Builder $query): Builder
+    {
+        return $query->orderBy('created_at', 'desc');
+    }
+
+    /**
+     * Scope a query to order topics by the most recent reply.
+     *
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeRecentReplied(Builder $query): Builder
+    {
+        // 当话题有新回复时，我们将编写逻辑来更新话题模型的 reply_count 属性，
+        // 此时会自动触发框架对数据模型 updated_at 时间戳的更新
+        return $query->orderBy('updated_at', 'desc');
     }
 }
