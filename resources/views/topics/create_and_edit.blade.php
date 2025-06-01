@@ -1,3 +1,4 @@
+@php use Illuminate\Support\Facades\Vite; @endphp
 @extends('layouts.app')
 
 @section('title', isset($topic) ? '编辑话题' : '创建话题')
@@ -38,7 +39,8 @@
 
                                     <div class="mb-3">
                                         <select class="form-control" name="category_id" required>
-                                            <option value="" hidden disabled selected>{{ __('Please select a category.') }}</option>
+                                            <option value="" hidden disabled
+                                                    selected>{{ __('Please select a category.') }}</option>
                                             @foreach ($categories as $value)
                                                 <option value="{{ $value->id }}">{{ $value->name }}</option>
                                             @endforeach
@@ -62,4 +64,30 @@
         </div>
     </div>
 
+@endsection
+
+@section('styles')
+    @vite('resources/editor/css/simditor.css')
+@endsection
+
+@section('scripts')
+    @parent
+
+    {{-- 为 Simditor 的所有 JS 文件添加 defer 属性 --}}
+    <script src="{{ Vite::asset('resources/editor/js/module.js') }}" defer></script>
+    <script src="{{ Vite::asset('resources/editor/js/hotkeys.js') }}" defer></script>
+    <script src="{{ Vite::asset('resources/editor/js/uploader.js') }}" defer></script>
+    <script src="{{ Vite::asset('resources/editor/js/simditor.js') }}" defer></script>
+
+
+    {{-- This is script to initialize Simditor --}}
+    <script type="module">
+        if (window.$) {
+            window.$(document).ready(function() {
+                const editor = new Simditor({
+                    textarea: window.$('#editor'),
+                });
+            });
+        }
+    </script>
 @endsection
