@@ -6,7 +6,9 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
@@ -42,6 +44,8 @@ use Illuminate\Support\Carbon;
  * @property string|null $introduction 个人简介
  * @method static Builder<static>|User whereAvatar($value)
  * @method static Builder<static>|User whereIntroduction($value)
+ * @property-read Collection<int, Topic> $topics
+ * @property-read int|null $topics_count
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements MustVerifyEmail
@@ -83,5 +87,15 @@ class User extends Authenticatable implements MustVerifyEmail
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * User has many topic.
+     *
+     * @return HasMany
+     */
+    public function topics(): HasMany
+    {
+        return $this->hasMany(Topic::class);
     }
 }
