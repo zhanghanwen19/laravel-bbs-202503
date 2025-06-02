@@ -7,6 +7,7 @@ use App\Http\Requests\StoreTopicRequest;
 use App\Http\Requests\UpdateTopicRequest;
 use App\Models\Category;
 use App\Models\Topic;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -76,18 +77,30 @@ class TopicController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     *
+     * @param Topic $topic
+     * @return View
+     * @throws AuthorizationException
      */
-    public function edit(Topic $topic)
+    public function edit(Topic $topic): View
     {
-        //
+        $this->authorize('update', $topic);
+        $categories = Category::all();
+        return view('topics.create_and_edit', compact('topic', 'categories'));
     }
 
     /**
      * Update the specified resource in storage.
+     * @throws AuthorizationException
      */
-    public function update(UpdateTopicRequest $request, Topic $topic)
+    public function update(UpdateTopicRequest $request, Topic $topic): RedirectResponse
     {
-        //
+        $this->authorize('update', $topic);
+
+        $topic->fill($request->validated());
+        $topic->save();
+
+        return redirect()->route('topics.show', $topic)->with('success', 'Topic updated successfully.');
     }
 
     /**
