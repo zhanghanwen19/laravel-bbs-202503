@@ -105,10 +105,17 @@ class TopicController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @param Topic $topic
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
-    public function destroy(Topic $topic)
+    public function destroy(Topic $topic): RedirectResponse
     {
-        //
+        $this->authorize('destroy', $topic);
+        $topic->delete();
+
+        return redirect()->route('topics.index')->with('success', 'Topic deleted successfully.');
     }
 
     /**
