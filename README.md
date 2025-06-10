@@ -337,6 +337,10 @@
     ```bash
     php artisan horizon
     ```
+    - 或者使用
+      ```bash
+      php artisan queue:listen
+      ```
 
 - 访问
     ```
@@ -346,3 +350,13 @@
 - 在生产环境中使用 Horizon
     - 使用 Supervisor 进程工具进行管理，配置和使用请参照 文档 进行配置；
     - 每一次部署代码时，需 artisan horizon:terminate 然后再 artisan horizon 重新加载代码。
+
+- 生成 Reply 骨架
+    ```bash
+    php artisan make:model Reply -a -s -p
+    ```
+
+- 执行数据迁移 -d memory_limit=512M 临时增加内存限制
+    ```bash
+    php -d memory_limit=512M artisan migrate:fresh --seed
+    ```
