@@ -45,7 +45,11 @@ Route::resource('users', UserController::class)->only(['show', 'update', 'edit']
 // GET|HEAD        users/{user}/edit ..... users.edit › UserController@edit
 
 // topic 资源路由
-Route::resource('topics', TopicController::class);
+Route::resource('topics', TopicController::class)->only(['index', 'create', 'store', 'update', 'edit', 'destroy']);
+
+// 请求单个话题的时候加上 slug
+Route::get('topics/{topic}/{slug?}', [TopicController::class, 'show'])
+    ->name('topics.show');
 
 // 按照分类显示话题
 Route::resource('categories', CategoryController::class)->only(['show']);

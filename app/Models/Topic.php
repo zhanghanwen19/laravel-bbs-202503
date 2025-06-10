@@ -120,4 +120,19 @@ class Topic extends Model
         // 此时会自动触发框架对数据模型 updated_at 时间戳的更新
         return $query->orderBy('updated_at', 'desc');
     }
+
+    /**
+     * Generate a link to the topic.
+     *
+     * @param array $params Additional parameters to include in the link.
+     * @return string
+     */
+    public function link(array $params = []): string
+    {
+        // http://example.com/topics/1/slug
+        // http://example.com/topics/当前 topic 的 ID/经过我们使用 urlencode 过后的 title
+        // http://127.0.0.1:8000/topics/292/福岡大臣会見概要
+        $params = array_merge([$this->id, $this->slug], $params);
+        return route('topics.show', $params);
+    }
 }

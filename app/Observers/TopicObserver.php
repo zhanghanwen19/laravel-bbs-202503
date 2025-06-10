@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Topic;
+use Illuminate\Support\Str;
 
 class TopicObserver
 {
@@ -23,7 +24,7 @@ class TopicObserver
         // 如果没有 slug，则使用标题生成 slug
         // 我们按照查得的日本公司最常见的方式来处理 slug
         if (!$topic->slug) {
-            $topic->slug = rawurlencode($topic->title);
+            $topic->slug = rawurlencode(Str::replace(' ', '-', $topic->title));
         }
     }
 }

@@ -35,7 +35,7 @@ class TopicFactory extends Factory
             'user_id' => User::all()->random()->id,
             'category_id' => Category::all()->random()->id,
             'excerpt' => Str::limit($sentence, 50),
-            'slug' => Str::slug($sentence),
+            'slug' => rawurlencode(Str::replace(' ', '-', $sentence)),
             'created_at' => $createdAt,
             'updated_at' => $updatedAt,
         ];
