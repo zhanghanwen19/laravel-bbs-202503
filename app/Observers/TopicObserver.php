@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Jobs\GenerateSlug;
 use App\Models\Topic;
 use Illuminate\Support\Str;
 
@@ -20,11 +21,22 @@ class TopicObserver
 
         // 生成摘要
         $topic->excerpt = make_excerpt($topic->body);
+    }
 
+    /**
+     * After a topic is saved, if it does not have a slug, generate one.
+     *
+     * @param Topic $topic
+     * @return void
+     */
+    public function saved(Topic $topic): void
+    {
         // 如果没有 slug，则使用标题生成 slug
         // 我们按照查得的日本公司最常见的方式来处理 slug
+        // 我们使用队列来生成 slug
         if (!$topic->slug) {
-            $topic->slug = rawurlencode(Str::replace(' ', '-', $topic->title));
+            // 推送生成 slug 的任务到队列
+            dispatch(new GenerateSlug($topic));
         }
     }
 }

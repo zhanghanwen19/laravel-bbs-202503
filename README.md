@@ -306,3 +306,43 @@
     ```bash
     php artisan vendor:publish --provider="Mews\Purifier\PurifierServiceProvider"
     ```
+
+### 📅 2025/06/09
+
+- 安装 predis/predis
+    ```bash
+    composer require predis/predis
+    ```
+
+- 创建 GenerateSlug 任务
+    ```bash
+    php artisan make:job GenerateSlug
+    ```
+
+- 监听队列
+    ```bash
+    php artisan queue:listen
+    ```
+
+- 安装 laravel/horizon
+    ```bash
+    composer require laravel/horizon
+    ```
+- 发布配置文件
+    ```bash
+    php artisan vendor:publish --provider="Laravel\Horizon\HorizonServiceProvider"
+    ```
+
+- 启动 Horizon
+    ```bash
+    php artisan horizon
+    ```
+
+- 访问
+    ```
+    http://localhost:8000/horizon
+    ```
+
+- 在生产环境中使用 Horizon
+    - 使用 Supervisor 进程工具进行管理，配置和使用请参照 文档 进行配置；
+    - 每一次部署代码时，需 artisan horizon:terminate 然后再 artisan horizon 重新加载代码。
