@@ -161,3 +161,7 @@ body {
         background-color: #d15b47 !important;
     }
 }
+
+.d-flex > .me-3 {
+    flex-shrink: 0;
+}

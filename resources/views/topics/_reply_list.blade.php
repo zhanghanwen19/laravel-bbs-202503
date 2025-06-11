@@ -1,9 +1,9 @@
 <ul class="list-unstyled">
     @foreach ($replies as $index => $reply)
         <li class=" d-flex" name="reply{{ $reply->id }}" id="reply{{ $reply->id }}">
-            <div class="media-left w-25">
+            <div class="me-3">
                 <a href="{{ route('users.show', [$reply->user_id]) }}">
-                    <img class="media-object img-thumbnail mr-3" alt="{{ $reply->user->name }}"
+                    <img class="media-object img-thumbnail" alt="{{ $reply->user->name }}"
                          src="{{ $reply->user->avatar }}" style="width:48px; height:48px;"/>
                 </a>
             </div>
