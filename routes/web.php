@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -56,3 +57,6 @@ Route::resource('categories', CategoryController::class)->only(['show']);
 
 // 话题上传图片
 Route::post('upload_image', [TopicController::class, 'uploadImage'])->name('topics.upload_image');
+
+// 回复相关路由
+Route::resource('replies', ReplyController::class)->only(['store', 'destroy']);

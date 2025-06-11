@@ -45,7 +45,7 @@ class ReplyPolicy
      */
     public function delete(User $user, Reply $reply): bool
     {
-        return false;
+        return $user->id === $reply->user_id;
     }
 
     /**
