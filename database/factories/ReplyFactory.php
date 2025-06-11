@@ -18,10 +18,19 @@ class ReplyFactory extends Factory
      */
     public function definition(): array
     {
+        // 生成过去三年内到现在的随机 DateTime 对象
+        $createdAt = $this->faker->dateTimeBetween('-3 years', 'now');
+
+        // 生成一个随机的 updatedAt，它在 $createdAt 和当前时间之间
+        // 确保 updatedAt 大于等于 createdAt
+        $updatedAt = $this->faker->dateTimeBetween($createdAt, 'now');
+
         return [
-            'content' => $this->faker->realText(),
+            'content' => $this->faker->realText(150),
             'topic_id' => DB::table('topics')->inRandomOrder()->value('id'),
             'user_id' => DB::table('users')->inRandomOrder()->value('id'),
+            'created_at' => $createdAt,
+            'updated_at' => $updatedAt,
         ];
     }
 }
