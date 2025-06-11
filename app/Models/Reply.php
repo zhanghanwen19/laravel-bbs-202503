@@ -5,6 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * 
+ *
+ * @property-read \App\Models\Topic|null $topic
+ * @property-read \App\Models\User|null $user
+ * @method static \Database\Factories\ReplyFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Reply newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Reply newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Reply query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Reply recent()
+ * @mixin \Eloquent
+ */
 class Reply extends Model
 {
     use HasFactory;

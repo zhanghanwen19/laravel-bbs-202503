@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property string $title 标题
@@ -49,6 +49,8 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|Topic recent()
  * @method static Builder<static>|Topic recentReplied()
  * @method static Builder<static>|Topic withOrder(string $order)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Reply> $replies
+ * @property-read int|null $replies_count
  * @mixin \Eloquent
  */
 #[ObservedBy(TopicObserver::class)]

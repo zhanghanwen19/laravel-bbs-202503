@@ -16,7 +16,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property string $name
@@ -46,6 +46,8 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|User whereIntroduction($value)
  * @property-read Collection<int, Topic> $topics
  * @property-read int|null $topics_count
+ * @property-read Collection<int, \App\Models\Reply> $replies
+ * @property-read int|null $replies_count
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements MustVerifyEmail
