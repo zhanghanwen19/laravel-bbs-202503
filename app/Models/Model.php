@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
+
 /**
- * 
  *
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Model newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Model newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Model query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Model recent()
+ *
+ * @method static Builder<static>|Model newModelQuery()
+ * @method static Builder<static>|Model newQuery()
+ * @method static Builder<static>|Model query()
+ * @method static Builder<static>|Model recent()
  * @mixin \Eloquent
  */
 class Model extends \Illuminate\Database\Eloquent\Model

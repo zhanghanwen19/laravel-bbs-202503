@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\TopicController;
@@ -60,3 +61,7 @@ Route::post('upload_image', [TopicController::class, 'uploadImage'])->name('topi
 
 // 回复相关路由
 Route::resource('replies', ReplyController::class)->only(['store', 'destroy']);
+
+// 获取通知列表
+Route::resource('notifications', NotificationsController::class)
+    ->only(['index'])->middleware('auth');

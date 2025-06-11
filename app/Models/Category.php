@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $name 名称
@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @method static Builder<static>|Category whereId($value)
  * @method static Builder<static>|Category whereName($value)
  * @method static Builder<static>|Category wherePostCount($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Category recent()
+ * @method static Builder<static>|Category recent()
  * @mixin \Eloquent
  */
 class Category extends Model

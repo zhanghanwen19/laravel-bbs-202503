@@ -382,3 +382,8 @@
     ```bash
     php artisan make:notification TopicReplied
     ```
+
+- 创建 NotificationController
+    ```bash
+    php artisan make:controller NotificationsController
+    ```

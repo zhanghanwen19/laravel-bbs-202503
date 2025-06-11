@@ -49,6 +49,8 @@ use Illuminate\Support\Carbon;
  * @property-read int|null $topics_count
  * @property-read Collection<int, Reply> $replies
  * @property-read int|null $replies_count
+ * @property int $notification_count
+ * @method static Builder<static>|User whereNotificationCount($value)
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements MustVerifyEmail
@@ -146,5 +148,17 @@ class User extends Authenticatable implements MustVerifyEmail
     public function replies(): HasMany
     {
         return $this->hasMany(Reply::class);
+    }
+
+    /**
+     * Mark all notifications as read.
+     *
+     * @return void
+     */
+    public function markAsRead(): void
+    {
+        $this->notification_count = 0;
+        $this->save();
+        $this->notifications->markAsRead();
     }
 }
