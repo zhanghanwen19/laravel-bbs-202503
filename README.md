@@ -360,3 +360,25 @@
     ```bash
     php -d memory_limit=512M artisan migrate:fresh --seed
     ```
+
+### 📅 2025/06/10
+
+- 创建 ReplyObserver
+    ```bash
+    php artisan make:observer ReplyObserver
+    ```
+
+- 创建通知 notifications 的数据迁移文件
+    ```bash
+    php artisan notifications:table
+    ```
+
+- 给 users 表添加 notification_count 字段
+    ```bash
+    php artisan make:migration add_notification_count_to_users_table --table=users
+    ```
+
+- 创建 TopicReplied 通知
+    ```bash
+    php artisan make:notification TopicReplied
+    ```
