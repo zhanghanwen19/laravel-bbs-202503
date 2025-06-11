@@ -9,6 +9,8 @@ use Random\RandomException;
 
 class ReplySeeder extends Seeder
 {
+    use WithoutModelEvents;
+
     /**
      * Run the database seeds.
      * @throws RandomException
