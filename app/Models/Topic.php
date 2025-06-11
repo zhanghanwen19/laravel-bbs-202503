@@ -6,13 +6,14 @@ use App\Observers\TopicObserver;
 use Database\Factories\TopicFactory;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $title 标题
@@ -49,7 +50,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|Topic recent()
  * @method static Builder<static>|Topic recentReplied()
  * @method static Builder<static>|Topic withOrder(string $order)
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Reply> $replies
+ * @property-read Collection<int, Reply> $replies
  * @property-read int|null $replies_count
  * @mixin \Eloquent
  */
@@ -146,5 +147,19 @@ class Topic extends Model
         // http://127.0.0.1:8000/topics/292/福岡大臣会見概要
         $params = array_merge([$this->id, $this->slug], $params);
         return route('topics.show', $params);
+    }
+
+    /**
+     * Update the reply count for the topic.
+     *
+     * This method counts the number of replies associated with the topic
+     * and updates the reply_count attribute accordingly.
+     *
+     * @return void
+     */
+    public function updateReplyCount(): void
+    {
+        $this->reply_count = $this->replies->count();
+        $this->save();
     }
 }

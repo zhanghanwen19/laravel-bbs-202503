@@ -47,13 +47,18 @@
                     @can('update', $topic)
                         <div class="operate">
                             <hr>
-                            <a href="{{ route('topics.edit', $topic->id) }}" class="btn btn-outline-secondary btn-sm"
-                               role="button">
+                            <a href="{{ route('topics.edit', $topic->id) }}" class="btn btn-outline-secondary btn-sm" role="button">
                                 <i class="far fa-edit"></i> {{ __('Edit') }}
                             </a>
-                            <a href="#" class="btn btn-outline-secondary btn-sm" role="button">
-                                <i class="far fa-trash-alt"></i> {{ __('Delete') }}
-                            </a>
+                            <form action="{{ route('topics.destroy', $topic->id) }}" method="post"
+                                  style="display: inline-block;"
+                                  onsubmit="return confirm('{{ __('Are you sure you want to delete this?') }}');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-outline-secondary btn-sm">
+                                    <i class="far fa-trash-alt"></i> {{ __('Delete') }}
+                                </button>
+                            </form>
                         </div>
                     @endcan
 

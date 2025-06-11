@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Jobs\GenerateSlug;
 use App\Models\Topic;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class TopicObserver
@@ -38,5 +39,16 @@ class TopicObserver
             // 推送生成 slug 的任务到队列
             dispatch(new GenerateSlug($topic));
         }
+    }
+
+    /**
+     * When a topic is deleted, remove all replies associated with it.
+     *
+     * @param Topic $topic
+     * @return void
+     */
+    public function deleted(Topic $topic): void
+    {
+        DB::table('replies')->where('topic_id', $topic->id)->delete();
     }
 }

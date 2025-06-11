@@ -49,7 +49,7 @@ class ReplyController extends Controller
      */
     public function destroy(Reply $reply): RedirectResponse
     {
-        $this->authorize('delete', $reply);
+        $this->authorize('destroy', $reply);
         $reply->delete();
 
         return redirect()->to($reply->topic->link())->with('success', 'Reply deleted successfully!');
