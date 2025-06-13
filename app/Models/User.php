@@ -15,6 +15,9 @@ use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  *
@@ -51,12 +54,20 @@ use Illuminate\Support\Carbon;
  * @property-read int|null $replies_count
  * @property int $notification_count
  * @method static Builder<static>|User whereNotificationCount($value)
+ * @property-read Collection<int, Permission> $permissions
+ * @property-read int|null $permissions_count
+ * @property-read Collection<int, Role> $roles
+ * @property-read int|null $roles_count
+ * @method static Builder<static>|User permission($permissions, $without = false)
+ * @method static Builder<static>|User role($roles, $guard = null, $without = false)
+ * @method static Builder<static>|User withoutPermission($permissions)
+ * @method static Builder<static>|User withoutRole($roles, $guard = null)
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, MustVerifyEmailTrait;
+    use HasFactory, MustVerifyEmailTrait, HasRoles;
 
     use Notifiable {
         notify as protected laravelNotify;

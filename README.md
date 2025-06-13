@@ -387,3 +387,43 @@
     ```bash
     php artisan make:controller NotificationsController
     ```
+
+### 📅 2025/06/12
+
+- 我们使用 [spatie/laravel-permission](https://spatie.be/docs/laravel-permission/v6/introduction) 来管理用户的角色和权限
+    - 该包可以让我们轻松地为用户分配角色和权限, 并且可以在应用程序中进行权限验证.
+    - 该包还提供了一个命令行工具, 可以让我们轻松地创建角色和权限.
+
+- 安装 spatie/laravel-permission
+    ```bash
+    composer require spatie/laravel-permission
+    ```
+
+- 发布配置文件
+    ```bash
+    php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+    ```
+
+- 基于角色的权限管理 RBAC
+    - RBAC 是 Role-Based Access Control 的缩写, 是一种基于角色的权限管理方式.
+    - 在 RBAC 中, 用户被分配到一个或多个角色, 每个角色拥有一组权限.
+    - 通过角色来管理用户的权限, 例如: 普通用户只能发布文章, 管理员可以管理所有用户等.
+    - 每个公司都有自己的角色和权限
+        - 会计: 管理公司财务 - 对应在公司内部的管理后台的话他就可以查看和管理公司的财务数据
+        - 人事: 负责招聘和员工管理 - 查看出勤记录, 访问和编辑员工信息等
+        - 销售: 负责销售和客户关系 - 查看和编辑客户信息, 处理订单等
+        - 技术: 负责技术支持和产品开发 - 可能会有更高的权限, 可以访问和编辑公司的技术文档, 处理技术问题等
+
+- 我们使用了 spatie/laravel-permission 扩展来管理用户的角色和权限
+    - 用户表 `users` 存储用户的基本信息, 例如用户名, 邮箱, 密码等
+    - 角色表 `roles` 角色是用户在网站中的身份, 例如: 普通用户, 管理员, 会计等
+    - 权限表 `permissions` 网站中的权限, 例如: 发布文章, 评论文章, 管理用户等
+    - 角色和权限的关联表 `role_has_permissions` 表明某个角色拥有某个权限
+    - 用户和角色的关联表 `model_has_roles` 表明某个用户拥有某个角色
+    - 用户和权限的关联表 `model_has_permissions` 表明某个用户拥有某个权限
+    - 我们可以通过角色来管理用户的权限, 例如: 普通用户只能发布文章, 管理员可以管理所有用户等
+
+- 创建 migrate 文件来初始化权限和角色数据
+    ```bash
+    php artisan make:migration seed_roles_and_permissions_data
+    ```
