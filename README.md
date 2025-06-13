@@ -427,3 +427,8 @@
     ```bash
     php artisan make:migration seed_roles_and_permissions_data
     ```
+
+- 使用 lab404/laravel-impersonate 来实现用户的模拟登录功能, 方便在开发和测试过程中模拟其他用户的操作
+    ```bash
+    composer require lab404/laravel-impersonate
+    ```
