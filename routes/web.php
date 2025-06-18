@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Middleware\RoleMiddleware;
 use Spatie\Permission\Middleware\PermissionMiddleware;
 
-Route::get('/', [PagesController::class, 'root'])->name('root');
+Route::get('/', [TopicController::class, 'index'])->name('root');
 
 // 用户身份验证相关的路由
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
