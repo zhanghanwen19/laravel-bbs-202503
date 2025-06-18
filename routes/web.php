@@ -14,8 +14,9 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\UserController;
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use Spatie\Permission\Middleware\RoleMiddleware;
+use Spatie\Permission\Middleware\PermissionMiddleware;
 
 Route::get('/', [PagesController::class, 'root'])->name('root');
 
@@ -76,14 +77,14 @@ Route::get('/stop-impersonating', [UserController::class, 'stopImpersonating'])-
 // 后台管理路由
 Route::prefix('admin')
     ->as('admin.') // 路由名称前缀，如 admin.dashboard
-    ->middleware(['web', 'auth']) // 可根据需要添加更多中间件
+    ->middleware(['web', 'auth', RoleMiddleware::class . ':Founder|Maintainer']) // 可根据需要添加更多中间件
     ->group(function () {
 
         // 后台首页
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
         // 用户管理
-        Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
+        Route::resource('users', \App\Http\Controllers\Admin\UserController::class)->middleware([RoleMiddleware::class . ':Founder']);
 
         // 话题管理
         Route::resource('topics', \App\Http\Controllers\Admin\TopicController::class);
@@ -95,5 +96,5 @@ Route::prefix('admin')
         Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
 
         // 设置
-        Route::resource('settings', SettingController::class);
+        Route::resource('settings', SettingController::class)->middleware([RoleMiddleware::class . ':Founder']);
     });

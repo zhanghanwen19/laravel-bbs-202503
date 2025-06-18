@@ -9,13 +9,6 @@
             @csrf
             @method('PUT')
 
-            {{-- 成功或错误消息 --}}
-            @if (session('success'))
-                <div class="tw-bg-green-100 tw-border tw-border-green-400 tw-text-green-700 tw-px-4 tw-py-3 tw-rounded-lg tw-relative tw-mb-6" role="alert">
-                    <span class="tw-block sm:tw-inline">{{ session('success') }}</span>
-                </div>
-            @endif
-
             @if ($errors->any())
                 <div class="tw-bg-red-100 tw-border tw-border-red-400 tw-text-red-700 tw-px-4 tw-py-3 tw-rounded-lg tw-relative tw-mb-6" role="alert">
                     <ul class="tw-mt-1 tw-list-disc tw-list-inside tw-text-sm tw-text-red-600">
