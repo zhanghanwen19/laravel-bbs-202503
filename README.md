@@ -432,3 +432,24 @@
     ```bash
     composer require lab404/laravel-impersonate
     ```
+
+### 📅 2025/06/17
+
+- 创建 pandaria:calculate-active-user 命令
+    ```bash
+    php artisan make:command CalculateActiveUser --command=pandaria:calculate-active-user
+    ```
+
+- 运行
+    ```bash
+    php artisan pandaria:calculate-active-user
+    ```
+
+- macOS 打开定时任务配置文件
+    ```bash
+    crontab -e
+    ```
+    - 添加定时任务 (请注意项目的绝对路径要替换成你自己的)
+        ```
+        * * * * * cd /Library/WebServer/Documents/cod/laravel-project-202503/laravel-bbs-202503 && php artisan schedule:run >> /dev/null 2>&1
+        ```

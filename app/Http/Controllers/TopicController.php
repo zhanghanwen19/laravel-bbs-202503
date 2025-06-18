@@ -7,6 +7,7 @@ use App\Http\Requests\StoreTopicRequest;
 use App\Http\Requests\UpdateTopicRequest;
 use App\Models\Category;
 use App\Models\Topic;
+use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -28,15 +29,18 @@ class TopicController extends Controller
      *
      * @param Request $request
      * @param Topic $topic
+     * @param User $user
      * @return View
      */
-    public function index(Request $request, Topic $topic): View
+    public function index(Request $request, Topic $topic, User $user): View
     {
         $topics = $topic->withOrder($request->order)
             ->with(['user', 'category'])
             ->paginate($this->perPage);
 
-        return view('topics.index', compact('topics'));
+        $active_users = $user->getActiveUsers();
+
+        return view('topics.index', compact('topics', 'active_users'));
     }
 
     /**
