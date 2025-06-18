@@ -1,15 +1,15 @@
 @php use Illuminate\Support\Str; @endphp
 @extends('admin.layouts.app')
 
-@section('title', __('Topic Management'))
-@section('description', __('Topics Overview'))
+@section('title', __('Reply Management'))
+@section('description', __('Replies Overview'))
 
 @section('content')
     <div class="tw-bg-white tw-shadow-xl sm:tw-rounded-lg tw-p-6">
         <div class="tw-mb-6 tw-flex tw-flex-col md:tw-flex-row tw-justify-between tw-items-center tw-gap-4">
             {{-- 搜索框 --}}
             <div class="tw-flex-1 tw-w-full md:tw-w-auto">
-                <form action="{{ route('admin.topics.index') }}" method="GET" class="tw-flex tw-items-center tw-gap-2">
+                <form action="{{ route('admin.replies.index') }}" method="GET" class="tw-flex tw-items-center tw-gap-2">
                     <label for="search" class="tw-sr-only">{{ __('Search') }}</label>
                     <div class="tw-relative tw-flex-1">
                         <div
@@ -24,7 +24,7 @@
                         <input type="text"
                                name="search"
                                id="search"
-                               placeholder="{{ __('Search by title or body') }}"
+                               placeholder="{{ __('Search by content, topic title or user name') }}"
                                value="{{ request('search') }}"
                                class="tw-block tw-w-full tw-rounded-lg tw-border-gray-300 tw-shadow-sm focus:tw-ring-indigo-500 focus:tw-border-indigo-500 tw-py-2 tw-pl-10 tw-pr-4 tw-text-base tw-transition-all tw-duration-150">
                     </div>
@@ -35,9 +35,11 @@
                 </form>
             </div>
 
-            {{-- 排序选择和新建按钮 --}}
-            <div class="tw-flex tw-items-center tw-gap-2 tw-w-full md:tw-w-auto">
-                <form action="{{ route('admin.topics.index') }}" method="GET" class="tw-flex tw-items-center tw-gap-2">
+            {{-- 排序选择 (如果需要) --}}
+            {{-- 回复模块通常按时间排序，如果不需要其他排序方式可以省略 --}}
+            {{--
+            <div>
+                <form action="{{ route('admin.replies.index') }}" method="GET">
                     @if(request('search'))
                         <input type="hidden" name="search" value="{{ request('search') }}">
                     @endif
@@ -46,32 +48,19 @@
                             id="sort_by"
                             onchange="this.form.submit()"
                             class="tw-block tw-w-full tw-rounded-lg tw-border-gray-300 tw-shadow-sm focus:tw-ring-indigo-500 focus:tw-border-indigo-500 tw-py-2 tw-px-4 tw-text-base tw-pr-10 tw-transition-all tw-duration-150">
-                        <option
-                            value="recent_replied" {{ request('sort_by', 'recent_replied') == 'recent_replied' ? 'selected' : '' }}>{{ __('Most Replied') }}</option>
-                        <option
-                            value="recent" {{ request('sort_by') == 'recent' ? 'selected' : '' }}>{{ __('Latest Topic') }}</option>
-                        <option
-                            value="view_count" {{ request('sort_by') == 'view_count' ? 'selected' : '' }}>{{ __('Most Viewed') }}</option>
+                        <option value="latest" {{ request('sort_by', 'latest') == 'latest' ? 'selected' : '' }}>{{ __('Latest Registered') }}</option>
+                        <option value="oldest" {{ request('sort_by') == 'oldest' ? 'selected' : '' }}>{{ __('Oldest') }}</option>
                     </select>
                 </form>
-                <a href="{{ route('admin.topics.create') }}"
-                   class="tw-inline-flex tw-items-center tw-px-5 tw-py-2 tw-border tw-border-transparent tw-text-base tw-font-medium tw-rounded-lg tw-shadow-sm tw-text-white tw-bg-blue-600 hover:tw-bg-blue-700 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-offset-2 focus:tw-ring-blue-500 tw-transition-all tw-duration-200 ease-in-out">
-                    <svg class="tw-h-5 tw-w-5 tw-mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg>
-                    {{ __('New Topic') }}
-                </a>
             </div>
+            --}}
         </div>
 
-        @if ($topics->isEmpty())
-            <p class="tw-text-center tw-text-gray-500 tw-mt-8 tw-py-4 tw-bg-gray-50 tw-rounded-lg tw-border tw-border-gray-200">{{ __('No topics found.') }}</p>
+        @if ($replies->isEmpty())
+            <p class="tw-text-center tw-text-gray-500 tw-mt-8 tw-py-4 tw-bg-gray-50 tw-rounded-lg tw-border tw-border-gray-200">{{ __('No replies found.') }}</p>
         @else
             <div class="tw-overflow-x-auto tw-shadow-md tw-rounded-lg tw-border tw-border-gray-200">
-                <table
-                    class="tw-min-w-full tw-divide-y tw-divide-gray-200 tw-table-auto">
+                <table class="tw-min-w-full tw-divide-y tw-divide-gray-200 tw-table-auto">
                     <thead class="tw-bg-gray-50">
                     <tr>
                         <th scope="col"
@@ -80,11 +69,11 @@
                         </th>
                         <th scope="col"
                             class="tw-px-6 tw-py-3 tw-text-left tw-text-xs tw-font-medium tw-text-gray-500 tw-uppercase tw-tracking-wider">
-                            {{ __('Title') }}
+                            {{ __('Content') }}
                         </th>
                         <th scope="col"
                             class="tw-px-6 tw-py-3 tw-text-left tw-text-xs tw-font-medium tw-text-gray-500 tw-uppercase tw-tracking-wider">
-                            {{ __('Category') }}
+                            {{ __('Topic Title') }}
                         </th>
                         <th scope="col"
                             class="tw-px-6 tw-py-3 tw-text-left tw-text-xs tw-font-medium tw-text-gray-500 tw-uppercase tw-tracking-wider">
@@ -92,15 +81,7 @@
                         </th>
                         <th scope="col"
                             class="tw-px-6 tw-py-3 tw-text-left tw-text-xs tw-font-medium tw-text-gray-500 tw-uppercase tw-tracking-wider">
-                            {{ __('View Count') }}
-                        </th>
-                        <th scope="col"
-                            class="tw-px-6 tw-py-3 tw-text-left tw-text-xs tw-font-medium tw-text-gray-500 tw-uppercase tw-tracking-wider">
-                            {{ __('Reply Count') }}
-                        </th>
-                        <th scope="col"
-                            class="tw-px-6 tw-py-3 tw-text-left tw-text-xs tw-font-medium tw-text-gray-500 tw-uppercase tw-tracking-wider">
-                            {{ __('Last Updated At') }}
+                            {{ __('Replied At') }}
                         </th>
                         <th scope="col"
                             class="tw-px-6 tw-py-3 tw-text-right tw-text-xs tw-font-medium tw-text-gray-500 tw-uppercase tw-tracking-wider">
@@ -109,34 +90,28 @@
                     </tr>
                     </thead>
                     <tbody class="tw-bg-white tw-divide-y tw-divide-gray-200">
-                    @foreach ($topics as $topic)
+                    @foreach ($replies as $reply)
                         <tr class="hover:tw-bg-gray-50 tw-transition-colors tw-duration-150">
                             <td class="tw-px-6 tw-py-4 tw-whitespace-nowrap tw-text-sm tw-font-medium tw-text-gray-900">
-                                {{ $topic->id }}
+                                {{ $reply->id }}
                             </td>
                             <td class="tw-px-6 tw-py-4 tw-whitespace-nowrap tw-text-sm tw-font-medium tw-text-gray-900">
-                                <a href="{{ $topic->link() }}" target="_blank"
+                                {!! Str::limit($reply->content, 30, '...') !!}
+                            </td>
+                            <td class="tw-px-6 tw-py-4 tw-whitespace-nowrap tw-text-sm tw-text-gray-500">
+                                <a href="{{ route('admin.topics.show', $reply->topic) }}"
                                    class="tw-text-indigo-600 hover:tw-text-indigo-900 hover:tw-underline">
-                                    {{ Str::limit($topic->title, 30, '...') }}
+                                    {{ Str::limit($reply->topic->title ?? __('N/A'), 30, '...') }}
                                 </a>
                             </td>
                             <td class="tw-px-6 tw-py-4 tw-whitespace-nowrap tw-text-sm tw-text-gray-500">
-                                {{ $topic->category->name ?? __('N/A') }}
+                                {{ $reply->user->name ?? __('N/A') }}
                             </td>
                             <td class="tw-px-6 tw-py-4 tw-whitespace-nowrap tw-text-sm tw-text-gray-500">
-                                {{ $topic->user->name ?? __('N/A') }}
-                            </td>
-                            <td class="tw-px-6 tw-py-4 tw-whitespace-nowrap tw-text-sm tw-text-gray-500">
-                                {{ $topic->view_count }}
-                            </td>
-                            <td class="tw-px-6 tw-py-4 tw-whitespace-nowrap tw-text-sm tw-text-gray-500">
-                                {{ $topic->reply_count }}
-                            </td>
-                            <td class="tw-px-6 tw-py-4 tw-whitespace-nowrap tw-text-sm tw-text-gray-500">
-                                {{ $topic->updated_at->format('Y/m/d H:i') }}
+                                {{ $reply->created_at ? $reply->created_at->format('Y/m/d H:i:s') : __('N/A') }}
                             </td>
                             <td class="tw-px-6 tw-py-4 tw-whitespace-nowrap tw-text-right tw-text-sm tw-font-medium">
-                                <a href="{{ route('admin.topics.show', $topic) }}"
+                                <a href="{{ route('admin.replies.show', $reply) }}"
                                    class="tw-text-indigo-600 hover:tw-text-indigo-900 tw-mr-3 tw-inline-flex tw-items-center tw-gap-1">
                                     <svg class="tw-h-4 tw-w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                          xmlns="http://www.w3.org/2000/svg">
@@ -147,7 +122,7 @@
                                     </svg>
                                     {{ __('Details') }}
                                 </a>
-                                <a href="{{ route('admin.topics.edit', $topic) }}"
+                                <a href="{{ route('admin.replies.edit', $reply) }}"
                                    class="tw-text-green-600 hover:tw-text-green-900 tw-mr-3 tw-inline-flex tw-items-center tw-gap-1">
                                     <svg class="tw-h-4 tw-w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                          xmlns="http://www.w3.org/2000/svg">
@@ -156,9 +131,9 @@
                                     </svg>
                                     {{ __('Edit') }}
                                 </a>
-                                <form action="{{ route('admin.topics.destroy', $topic) }}" method="POST"
+                                <form action="{{ route('admin.replies.destroy', $reply) }}" method="POST"
                                       class="tw-inline"
-                                      onsubmit="return confirm('{{ __('Are you sure you want to delete this topic?') }}');">
+                                      onsubmit="return confirm('{{ __('Are you sure you want to delete this reply?') }}');">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"
@@ -179,7 +154,7 @@
             </div>
 
             <div class="tw-mt-4">
-                {{ $topics->links() }}
+                {{ $replies->links() }}
             </div>
         @endif
     </div>

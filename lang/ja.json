@@ -324,5 +324,18 @@
     "length": "長さ",
     "of": "の",
     "results": "結果",
-    "to": "に"
+    "to": "に",
+    "Reply Management": "返信管理",
+    "Replies Overview": "返信概要",
+    "Search by content, topic title or user name": "内容、トピックタイトル、またはユーザー名で検索",
+    "Topic Title": "トピックタイトル",
+    "Replied At": "返信日時",
+    "No replies found.": "返信が見つかりません。",
+    "Are you sure you want to delete this reply?": "この返信を削除してもよろしいですか？",
+    "Reply deleted successfully.": "返信が正常に削除されました。",
+    "Reply Details": "返信詳細",
+    "Reply Information": "返信情報",
+    "Edit Reply": "返信編集",
+    "Reply updated successfully.": "返信が正常に更新されました。",
+    "Back to Reply List": "返信リストに戻る"
 }

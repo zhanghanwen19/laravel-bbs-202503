@@ -9,6 +9,12 @@ use Illuminate\Contracts\View\View;
 
 class DashboardController extends Controller
 {
+    /**
+     * Display the admin dashboard.
+     * 显示管理员仪表盘。
+     *
+     * @return View
+     */
     public function index(): View
     {
         // 整理首页需要的数据

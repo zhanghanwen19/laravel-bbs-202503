@@ -36,7 +36,7 @@ class UserController extends Controller
             $query->orderBy('updated_at', 'desc');
         }
 
-        $users = $query->paginate(15);
+        $users = $query->paginate(15)->appends(request()->query());
 
         return view('admin.users.index', compact('users'));
     }

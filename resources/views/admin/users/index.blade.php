@@ -47,12 +47,6 @@
             </div>
         </div>
 
-        @if (session('success'))
-            <div class="tw-bg-green-100 tw-border tw-border-green-400 tw-text-green-700 tw-px-4 tw-py-3 tw-rounded-lg tw-relative tw-mb-4" role="alert">
-                <span class="tw-block sm:tw-inline">{{ session('success') }}</span>
-            </div>
-        @endif
-
         @if ($users->isEmpty())
             <p class="tw-text-center tw-text-gray-500 tw-mt-8 tw-py-4 tw-bg-gray-50 tw-rounded-lg tw-border tw-border-gray-200">{{ __('No users found.') }}</p>
         @else
