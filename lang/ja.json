@@ -358,5 +358,6 @@
     "Cannot delete category with associated topics.": "このカテゴリには関連するトピックがあるため、削除できません。",
     "User does not have the right roles.": "ユーザーは適切なロールを持っていません。",
     "Recommended Resources": "推奨リソース",
-    "User deleted successfully.": "ユーザーが正常に削除されました。"
+    "User deleted successfully.": "ユーザーが正常に削除されました。",
+    "Joined on": "登録日"
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Traits\ActiveUserHelper;
+use App\Models\Traits\LastActiveAtHelper;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
@@ -69,7 +70,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, MustVerifyEmailTrait, HasRoles, Impersonate, ActiveUserHelper;
+    use HasFactory, MustVerifyEmailTrait, HasRoles, Impersonate, ActiveUserHelper, LastActiveAtHelper;
 
     use Notifiable {
         notify as protected laravelNotify;

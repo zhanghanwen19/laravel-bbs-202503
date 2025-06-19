@@ -480,3 +480,30 @@
     ```bash
     php artisan migrate:fresh --seed
     ```
+
+- 创建 UserObserver
+    ```bash
+    php artisan make:observer UserObserver --model=User
+    ```
+
+- 创建 RecordLastActiveTime 中间件
+    ```bash
+    php artisan make:middleware RecordLastActiveTime
+    ```
+
+- 在 [app.php](bootstrap/app.php) 中注册中间件
+
+- 给 users 表添加 last_active_time 字段
+    ```bash
+    php artisan make:migration add_last_active_at_to_users_table --table=users
+    ```
+
+- 执行数据填充
+    ```bash
+    php artisan migrate:fresh --seed
+    ```
+
+- 创建 SyncUserActiveAt 对应的命令
+   ```bash
+    php artisan make:command SyncUserActiveAt --command=pandaria:sync-user-active-at
+    ```
