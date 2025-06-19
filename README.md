@@ -453,3 +453,30 @@
         ```
         * * * * * cd /Library/WebServer/Documents/cod/laravel-project-202503/laravel-bbs-202503 && php artisan schedule:run >> /dev/null 2>&1
         ```
+
+### 📅 2025/06/18
+
+- 创建 Link
+    ```bash
+    php artisan make:model Link -m
+    ```
+
+- 执行数据迁移
+    ```bash
+    php artisan migrate
+    ```
+
+- 创建 Factory
+    ```bash
+    php artisan make:factory LinkFactory
+    ```
+
+- 创建 Seeder
+    ```bash
+    php artisan make:seeder LinkSeeder
+    ```
+
+- 执行数据填充
+    ```bash
+    php artisan migrate:fresh --seed
+    ```

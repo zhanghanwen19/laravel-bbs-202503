@@ -356,5 +356,6 @@
     "Category updated successfully.": "カテゴリが正常に更新されました。",
     "Search by name or description": "名前または説明で検索",
     "Cannot delete category with associated topics.": "このカテゴリには関連するトピックがあるため、削除できません。",
-    "User does not have the right roles.": "ユーザーは適切なロールを持っていません。"
+    "User does not have the right roles.": "ユーザーは適切なロールを持っていません。",
+    "Recommended Resources": "推奨リソース"
 }
