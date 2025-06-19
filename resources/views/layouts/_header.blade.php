@@ -57,12 +57,12 @@
                         </a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdown" role="button"
                            data-bs-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
                             <img src="{{ auth()->user()->avatar }}"
                                  class="img-responsive img-circle" width="30px" height="30px" alt="">
-                            {{ auth()->user()->name }}
+                            <span class="ms-2">{{ auth()->user()->name }}</span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item"
@@ -84,7 +84,7 @@
                             @endif
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" id="logout" href="#">
-                                <form action="{{ route('logout') }}" method="POST" onsubmit="return confirm('Are you sure you want to log out?');">
+                                <form action="{{ route('logout') }}" method="POST" onsubmit="return confirm('{{ __('Are you sure you want to log out?') }}');">
                                     @csrf
                                     <button class="btn btn-block btn-danger" type="submit"
                                             name="button">{{ __('Logout') }}</button>

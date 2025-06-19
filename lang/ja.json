@@ -359,5 +359,9 @@
     "User does not have the right roles.": "ユーザーは適切なロールを持っていません。",
     "Recommended Resources": "推奨リソース",
     "User deleted successfully.": "ユーザーが正常に削除されました。",
-    "Joined on": "登録日"
+    "Joined on": "登録日",
+    "Your email address has been verified.": "メールアドレスが確認されました。",
+    "Are you sure you want to log out?": "ログアウトしてもよろしいですか？",
+    "New Published": "新規公開",
+    "Active Users": "アクティブユーザー"
 }

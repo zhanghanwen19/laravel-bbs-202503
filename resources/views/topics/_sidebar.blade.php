@@ -9,7 +9,7 @@
 @if (count($active_users))
     <div class="card mt-4">
         <div class="card-body active-users pt-2">
-            <div class="text-center mt-1 mb-0 text-muted">活跃用户</div>
+            <div class="text-center mt-1 mb-0 text-muted">{{ __('Active Users') }}</div>
             <hr class="mt-2">
             @foreach ($active_users as $active_user)
                 <a class="d-flex mt-2 text-decoration-none" href="{{ route('users.show', $active_user->id) }}">
