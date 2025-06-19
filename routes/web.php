@@ -95,6 +95,7 @@ Route::prefix('admin')
         // 分类管理
         Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
 
-        // 设置
-        Route::resource('settings', SettingController::class)->middleware([RoleMiddleware::class . ':Founder']);
+        // 站点设置路由
+        Route::get('settings', [SettingController::class, 'index'])->name('settings.index')->middleware([RoleMiddleware::class . ':Founder']);
+        Route::put('settings', [SettingController::class, 'update'])->name('settings.update')->middleware([RoleMiddleware::class . ':Founder']);
     });

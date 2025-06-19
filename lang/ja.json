@@ -363,5 +363,17 @@
     "Your email address has been verified.": "メールアドレスが確認されました。",
     "Are you sure you want to log out?": "ログアウトしてもよろしいですか？",
     "New Published": "新規公開",
-    "Active Users": "アクティブユーザー"
+    "Active Users": "アクティブユーザー",
+    "Settings Management": "設定管理",
+    "Site Settings": "サイト設定",
+    "Setting Name": "設定名",
+    "Setting Description": "設定の説明",
+    "Setting Value": "設定値",
+    "Setting Type": "設定タイプ",
+    "Settings updated successfully.": "設定が正常に更新されました。",
+    "Save Settings": "設定を保存",
+    "General Settings": "一般設定",
+    "SEO Settings": "SEO設定",
+    "Social Media Settings": "ソーシャルメディア設定",
+    "Reply created successfully!": "返信が正常に作成されました。"
 }

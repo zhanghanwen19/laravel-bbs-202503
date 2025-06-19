@@ -12,9 +12,14 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title', config('app.name'))</title>
+    @php$settings = \App\Models\Setting::getSettingsFromCache();@endphp
 
+    <title>@yield('title', $settings['site_name']->value ?? '')</title>
+
+    <meta name="description" content="{{ $settings['seo_description']->value ?? 'Pandaria bbs' }}"/>
     <meta name="description" content="@yield('description', 'Pandaria bbs')"/>
+
+    <meta name="keywords" content="{{ $settings['seo_keywords']->value ?? 'Pandaria bbs' }}"/>
 
     <!-- Use vite include styles and scripts. -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
