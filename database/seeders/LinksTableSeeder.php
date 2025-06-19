@@ -15,4 +15,4 @@ class LinksTableSeeder extends Seeder
     {
         Link::factory()->count(6)->create();
     }
-}   
+}
